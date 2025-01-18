@@ -2,7 +2,6 @@
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/beast/http.hpp>
-#include <json/json.h>
 #include <json/value.h>
 #include <json/reader.h>
 #include <functional>
