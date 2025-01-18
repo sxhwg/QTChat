@@ -13,7 +13,7 @@ int main()
         RedisMgr::GetInstance();
         auto &gCfgMgr = ConfigMgr::Inst();
         std::string gate_port_str = gCfgMgr["GateServer"]["Port"];
-        unsigned short gate_port = atoi(gate_port_str.c_str());
+        uint16_t gate_port = atoi(gate_port_str.c_str());
         asio::io_context ioc{1};
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait([&ioc](const boost::system::error_code &error, int signal_number)
