@@ -6,8 +6,6 @@
 #include "UserMgr.h"
 #include "ChatGrpcClient.h"
 
-using namespace std;
-
 LogicSystem::LogicSystem():m_stop(false){
 	RegisterCallBacks();
 	m_worker_thread = std::thread (&LogicSystem::DealMsg, this);
@@ -19,7 +17,7 @@ LogicSystem::~LogicSystem(){
 	m_worker_thread.join();
 }
 
-void LogicSystem::PostMsgToQue(shared_ptr < LogicNode> msg) {
+void LogicSystem::PostMsgToQue(std::shared_ptr < LogicNode> msg) {
 	std::unique_lock<std::mutex> unique_lk(m_mutex);
 	m_msg_que.push(msg);
 	//由0变为1则发送通知信号
@@ -41,7 +39,7 @@ void LogicSystem::DealMsg() {
 		if (m_stop ) {
 			while (!m_msg_que.empty()) {
 				auto msg_node = m_msg_que.front();
-				cout << "recv_msg id  is " << msg_node->m_recvnode->m_msg_id << std::endl;
+				std::cout << "recv_msg id  is " << msg_node->m_recvnode->m_msg_id << std::endl;
 				auto call_back_iter = m_fun_callbacks.find(msg_node->m_recvnode->m_msg_id);
 				if (call_back_iter == m_fun_callbacks.end()) {
 					m_msg_que.pop();
@@ -56,7 +54,7 @@ void LogicSystem::DealMsg() {
 
 		//如果没有停服，且说明队列中有数据
 		auto msg_node = m_msg_que.front();
-		cout << "recv_msg id  is " << msg_node->m_recvnode->m_msg_id << std::endl;
+		std::cout << "recv_msg id  is " << msg_node->m_recvnode->m_msg_id << std::endl;
 		auto call_back_iter = m_fun_callbacks.find(msg_node->m_recvnode->m_msg_id);
 		if (call_back_iter == m_fun_callbacks.end()) {
 			m_msg_que.pop();
@@ -71,30 +69,30 @@ void LogicSystem::DealMsg() {
 
 void LogicSystem::RegisterCallBacks() {
 	m_fun_callbacks[MSG_CHAT_LOGIN] = std::bind(&LogicSystem::LoginHandler, this,
-		placeholders::_1, placeholders::_2, placeholders::_3);
+		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 	m_fun_callbacks[ID_SEARCH_USER_REQ] = std::bind(&LogicSystem::SearchInfo, this,
-		placeholders::_1, placeholders::_2, placeholders::_3);
+		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 	m_fun_callbacks[ID_ADD_FRIEND_REQ] = std::bind(&LogicSystem::AddFriendApply, this,
-		placeholders::_1, placeholders::_2, placeholders::_3);
+		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 	m_fun_callbacks[ID_AUTH_FRIEND_REQ] = std::bind(&LogicSystem::AuthFriendApply, this,
-		placeholders::_1, placeholders::_2, placeholders::_3);
+		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
 	m_fun_callbacks[ID_TEXT_CHAT_MSG_REQ] = std::bind(&LogicSystem::DealChatTextMsg, this,
-		placeholders::_1, placeholders::_2, placeholders::_3);
+		std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	
 }
 
-void LogicSystem::LoginHandler(shared_ptr<CSession> session, const short &msg_id, const string &msg_data) {
+void LogicSystem::LoginHandler(std::shared_ptr<CSession> session, const short &msg_id, const std::string &msg_data) {
 	Json::Reader reader;
 	Json::Value root;
 	reader.parse(msg_data, root);
 	auto uid = root["uid"].asInt();
 	auto token = root["token"].asString();
 	std::cout << "user login uid is  " << uid << " user token  is "
-		<< token << endl;
+		<< token << std::endl;
 
 	Json::Value  rtvalue;
 	Defer defer([this, &rtvalue, session]() {
@@ -189,13 +187,13 @@ void LogicSystem::LoginHandler(shared_ptr<CSession> session, const short &msg_id
 	return;
 }
 
-void LogicSystem::SearchInfo(std::shared_ptr<CSession> session, const short& msg_id, const string& msg_data)
+void LogicSystem::SearchInfo(std::shared_ptr<CSession> session, const short& msg_id, const std::string& msg_data)
 {
 	Json::Reader reader;
 	Json::Value root;
 	reader.parse(msg_data, root);
 	auto uid_str = root["uid"].asString();
-	std::cout << "user SearchInfo uid is  " << uid_str << endl;
+	std::cout << "user SearchInfo uid is  " << uid_str << std::endl;
 
 	Json::Value  rtvalue;
 
@@ -214,7 +212,7 @@ void LogicSystem::SearchInfo(std::shared_ptr<CSession> session, const short& msg
 	return;
 }
 
-void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short& msg_id, const string& msg_data)
+void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short& msg_id, const std::string& msg_data)
 {
 	Json::Reader reader;
 	Json::Value root;
@@ -224,9 +222,9 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short&
 	auto bakname = root["bakname"].asString();
 	auto touid = root["touid"].asInt();
 	std::cout << "user login uid is  " << uid << " applyname  is "
-		<< applyname << " bakname is " << bakname << " touid is " << touid << endl;
+		<< applyname << " bakname is " << bakname << " touid is " << touid << std::endl;
 
-	Json::Value  rtvalue;
+	Json::Value rtvalue;
 	rtvalue["error"] = ErrorCodes::Success;
 	Defer defer([this, &rtvalue, session]() {
 		std::string return_str = rtvalue.toStyledString();
@@ -293,7 +291,7 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short&
 
 }
 
-void LogicSystem::AuthFriendApply(std::shared_ptr<CSession> session, const short& msg_id, const string& msg_data) {
+void LogicSystem::AuthFriendApply(std::shared_ptr<CSession> session, const short& msg_id, const std::string& msg_data) {
 	
 	Json::Reader reader;
 	Json::Value root;
@@ -383,7 +381,7 @@ void LogicSystem::AuthFriendApply(std::shared_ptr<CSession> session, const short
 	ChatGrpcClient::GetInstance()->NotifyAuthFriend(to_ip_value, auth_req);
 }
 
-void LogicSystem::DealChatTextMsg(std::shared_ptr<CSession> session, const short& msg_id, const string& msg_data) {
+void LogicSystem::DealChatTextMsg(std::shared_ptr<CSession> session, const short& msg_id, const std::string& msg_data) {
 	Json::Reader reader;
 	Json::Value root;
 	reader.parse(msg_data, root);
@@ -481,7 +479,7 @@ void LogicSystem::GetUserByUid(std::string uid_str, Json::Value& rtvalue)
 		auto sex = root["sex"].asInt();
 		auto icon = root["icon"].asString();
 		std::cout << "user  uid is  " << uid << " name  is "
-			<< name << " pwd is " << pwd << " email is " << email <<" icon is " << icon << endl;
+			<< name << " pwd is " << pwd << " email is " << email <<" icon is " << icon << std::endl;
 
 		rtvalue["uid"] = uid;
 		rtvalue["pwd"] = pwd;
@@ -549,7 +547,7 @@ void LogicSystem::GetUserByName(std::string name, Json::Value& rtvalue)
 		auto desc = root["desc"].asString();
 		auto sex = root["sex"].asInt();
 		std::cout << "user  uid is  " << uid << " name  is "
-			<< name << " pwd is " << pwd << " email is " << email << endl;
+			<< name << " pwd is " << pwd << " email is " << email << std::endl;
 
 		rtvalue["uid"] = uid;
 		rtvalue["pwd"] = pwd;
@@ -610,7 +608,7 @@ bool LogicSystem::GetBaseInfo(std::string base_key, int uid, std::shared_ptr<Use
 		userinfo->sex = root["sex"].asInt();
 		userinfo->icon = root["icon"].asString();
 		std::cout << "user login uid is  " << userinfo->uid << " name  is "
-			<< userinfo->name << " pwd is " << userinfo->pwd << " email is " << userinfo->email << endl;
+			<< userinfo->name << " pwd is " << userinfo->pwd << " email is " << userinfo->email << std::endl;
 	}
 	else {
 		//redis中没有则查询mysql

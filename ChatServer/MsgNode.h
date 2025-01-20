@@ -19,22 +19,20 @@ public:
 
 class RecvNode : public MsgNode
 {
-    friend class LogicSystem;
-
 public:
     RecvNode(short max_len, short msg_id);
 
 private:
+    friend class LogicSystem;
     short m_msg_id;
 };
 
 class SendNode : public MsgNode
 {
-    friend class LogicSystem;
-
 public:
     SendNode(const char *msg, short max_len, short msg_id);
 
 private:
+    friend class LogicSystem;
     short m_msg_id;
 };
