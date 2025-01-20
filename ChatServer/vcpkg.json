@@ -1,0 +1,41 @@
+{
+    "dependencies": [
+        "boost-beast",
+        "boost-uuid",
+        "boost-property-tree",
+        "boost-filesystem",
+        "jsoncpp",
+        "grpc",
+        "hiredis"
+    ],
+    "overrides": [
+        {
+            "name": "boost-beast",
+            "version": "1.86.0"
+        },
+        {
+            "name": "boost-uuid",
+            "version": "1.86.0"
+        },
+        {
+            "name": "boost-property-tree",
+            "version": "1.86.0"
+        },
+        {
+            "name": "boost-filesystem",
+            "version": "1.86.0"
+        },
+        {
+            "name": "jsoncpp",
+            "version": "1.9.6"
+        },
+        {
+            "name": "grpc",
+            "version": "1.68.2"
+        },
+        {
+            "name": "hiredis",
+            "version": "1.2.0"
+        }
+    ]
+}
