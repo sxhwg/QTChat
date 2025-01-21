@@ -48,8 +48,6 @@ set(PROJECT_SOURCES
     RedisMgr.h
     RedisMgr.cpp
     Singleton.h
-    StatusGrpcClient.h
-    StatusGrpcClient.cpp
     UserMgr.h
     UserMgr.cpp
 )
