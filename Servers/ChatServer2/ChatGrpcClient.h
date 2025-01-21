@@ -4,6 +4,7 @@
 #include <condition_variable>
 #include <atomic>
 #include <json/value.h>
+#include <json/reader.h>
 #include "message.grpc.pb.h"
 #include "message.pb.h"
 #include "Singleton.h"
