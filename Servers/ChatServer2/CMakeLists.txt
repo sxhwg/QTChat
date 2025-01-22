@@ -5,7 +5,7 @@ project(ChatServer)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(mysql-concpp_DIR /home/xhwg/c++lib/mysql-connector-c++-8.3.0)
+set(mysql-concpp_DIR /home/xhwg/C++lib/mysql-connector-c++-8.3.0)
 
 find_package(mysql-concpp CONFIG REQUIRED)
 find_package(boost_beast CONFIG REQUIRED)
@@ -85,12 +85,12 @@ add_custom_command(TARGET ChatServer POST_BUILD
 
 add_custom_command(TARGET ChatServer POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "/home/xhwg/c++lib/mysql-connector-c++-8.3.0/lib64/libmysqlcppconn8.so.2.8.3.0"
+    "/home/xhwg/C++lib/mysql-connector-c++-8.3.0/lib64/libmysqlcppconn8.so.2.8.3.0"
     "${CMAKE_BINARY_DIR}/bin"
 )
 
 add_custom_command(TARGET ChatServer POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "/home/xhwg/c++lib/mysql-connector-c++-8.3.0/lib64/libmysqlcppconn.so.9.8.3.0"
+    "/home/xhwg/C++lib/mysql-connector-c++-8.3.0/lib64/libmysqlcppconn.so.9.8.3.0"
     "${CMAKE_BINARY_DIR}/bin"
 )

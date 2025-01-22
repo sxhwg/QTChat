@@ -5,7 +5,7 @@ project(StatusServer)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(mysql-concpp_DIR /home/xhwg/c++lib/mysql-connector-c++-8.3.0)
+set(mysql-concpp_DIR /home/xhwg/C++lib/mysql-connector-c++-8.3.0)
 
 find_package(mysql-concpp CONFIG REQUIRED)
 find_package(boost_beast CONFIG REQUIRED)

@@ -9,7 +9,7 @@
                 "CMAKE_BUILD_TYPE": "Debug"
             },
             "environment": {
-                "VCPKG_ROOT": "/home/xhwg/c++lib/vcpkg"
+                "VCPKG_ROOT": "/home/xhwg/C++lib/vcpkg"
             }
         },
         {
@@ -20,7 +20,7 @@
                 "CMAKE_BUILD_TYPE": "Release"
             },
             "environment": {
-                "VCPKG_ROOT": "/home/xhwg/c++lib/vcpkg"
+                "VCPKG_ROOT": "/home/xhwg/C++lib/vcpkg"
             }
         }
     ],
