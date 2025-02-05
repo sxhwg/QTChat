@@ -25,6 +25,7 @@ target_link_libraries(QtModules INTERFACE
 
 #添加子目录
 add_subdirectory(common)
+add_subdirectory(customize)
 add_subdirectory(chat)
 add_subdirectory(login)
 
@@ -38,12 +39,14 @@ add_executable(QTChat ${MAIN_SOURCES} res.qrc)
 target_link_libraries(QTChat PRIVATE
     QtModules
     CommonInterface
+    CustomizeInterface
     LoginInterface
     ChatInterface
 )
 #链接对象库
 target_link_libraries(QTChat PRIVATE
     Common
+    Customize
     Login
     Chat
 )
