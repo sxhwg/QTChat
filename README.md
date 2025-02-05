@@ -9,7 +9,7 @@
 ## 二、环境需求
 
 客户端(Windows)：QT Creator  
-服务端(Linux)：Visual Studio Code, CMake, Git, vcpkg, Node.js
+服务端(Linux)：Visual Studio Code, CMake, Git, vcpkg, mysql-connector-c++, Node.js
 
 实际上客户端和服务端都可以在Windows和Linux上构建，只需要配置相应的环境和修改部分构建相关文件。
 
@@ -21,8 +21,9 @@ QT Creator的环境搭建比较简单，略。
 
 ### 服务端
 
-主要介绍vcpkg的环境搭建及第三方库安装方式，vcpkg搭配CMake在能够实现较好的包管理功能，但网上资料不够详细，甚至问AI都会踩很多坑，所以分享下我的解决方案。  
-另外本项目中，服务端除了mysql-connector-c++这个库vcpkg安装出错，必须手动安装外，其他第三方库均采用vcpkg安装。
+主要介绍vcpkg的环境搭建及第三方库安装方式，其他环境的搭建也比较简单。  
+vcpkg搭配CMake在能够实现较好的包管理功能，但网上资料不够详细，甚至问AI都会踩很多坑，所以分享下我的解决方案。  
+本项目中，服务端除了mysql-connector-c++这个库vcpkg安装出错，必须手动安装外，其他第三方库均采用vcpkg安装。
 
 1. 克隆vcpkg仓库。  
 `git clone https://github.com/microsoft/vcpkg.git`
@@ -30,7 +31,7 @@ QT Creator的环境搭建比较简单，略。
 2. 切换到vcpkg目录，执行Linux对应的脚本文件。  
 `./bootstrap-vcpkg.sh`
 
-3. 将vcpkg命令永久配置到环境变量，我使用的ubuntu-22.04.5，采用以下命令。  
+3. 将vcpkg命令永久配置到环境变量，我使用的ubuntu-22.04.5，采用以下命令：  
 打开文件 `nano ~/.bashrc`  
 在文件末尾添加 `export PATH="$PATH:/vcpkg文件夹"`  
 关闭文件后，执行 `source ~/.bashrc`
@@ -43,7 +44,7 @@ QT Creator的环境搭建比较简单，略。
 然后复制本项目对应文件的内容，也可以直接替换文件  
 
 6. 创建两个CMake的配置文件：CMakePresets.json和CMakeUserPresets.json。  
-复制本项目对应文件的内容，也可以直接替换文件。  
+然后复制本项目对应文件的内容，也可以直接替换文件。  
 修改CMakeUserPresets.json中所有VCPKG_ROOT对应的值，改为你的vcpkg文件夹路径。  
 
     ```json
@@ -67,7 +68,7 @@ QT Creator的环境搭建比较简单，略。
 
 8. 写好CMakeLists.txt文件后，使用CMake构建时就会自动先使用vcpkg安装第三方库。
 
-9. 额外说下，如果是在Windows上，CMakeUserPresets.json的缓存变量部分需要修改以下这样。
+9. 额外说下，如果是在Windows上，CMakeUserPresets.json的缓存变量部分需要修改为以下这样：
 
     ```json
     "cacheVariables": {
