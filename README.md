@@ -65,11 +65,12 @@ QT Creator的环境搭建比较简单，略。
       }
     ```
 
-8. 额外说明  
-如果是在Windows上，CMakeUserPresets.json的缓存变量部分需要修改。
+8. 写好CMakeLists.txt文件后，使用CMake构建时就会自动先使用vcpkg安装第三方库。
+
+9. 额外说下，如果是在Windows上，CMakeUserPresets.json的缓存变量部分需要修改以下这样。
 
     ```json
-        "cacheVariables": {
+    "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_HOST_TRIPLET": "x64-windows-static-md",
         "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
@@ -77,4 +78,4 @@ QT Creator的环境搭建比较简单，略。
       }
     ```
 
-9. vcpkg还有些使用细节上面没有提到，比如清单模式下怎么控制版本和仅安装部分boost库，以及大量本项目没有用到的功能，这些可以参考官方文档：[文档链接](https://learn.microsoft.com/zh-cn/vcpkg/)
+10. vcpkg还有些使用细节上面没有提到，比如清单模式下怎么控制版本和仅安装部分boost库，以及大量本项目没有用到的功能，这些可以参考官方文档：[文档链接](https://learn.microsoft.com/zh-cn/vcpkg/)
