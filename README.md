@@ -4,7 +4,7 @@
 
 全栈即时通讯项目，客户端基于QT，服务端基于C++。  
 参考的恋恋风辰老师的开源项目：[项目链接](https://gitee.com/secondtonone1/llfcchat)  
-目前在该项目的基础上，将客户端的qmake构建改为CMake构建并模块化；将服务端的MSBuild构建改为CMake构建，配合vcpkg实现简单的包管理和清晰的项目依赖。
+目前在该项目的基础上，将客户端的qmake构建改为CMake构建，原本的100+源文件被划分到多个子目录中，实现模块化管理；将服务端的MSBuild构建改为CMake构建，搭配vcpkg实现良好的项目依赖管理，并从Windows平台移植到Linux平台。
 
 ## 二、环境需求
 
