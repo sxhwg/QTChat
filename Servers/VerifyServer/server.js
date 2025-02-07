@@ -69,7 +69,7 @@ function main() {
     server.addService(message_proto.VerifyService.service, { GetVerifyCode: GetVerifyCode })
     server.bindAsync('127.0.0.1:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start()
-        console.log('varify server started')        
+        console.log('verify server started')        
     })
 }
 

@@ -81,7 +81,7 @@ LogicSystem::LogicSystem()
 		std::string  verify_code;
 		bool b_get_verify = RedisMgr::GetInstance()->Get(CODEPREFIX+src_root["email"].asString(), verify_code);
 		if (!b_get_verify) {
-			std::cout << " get varify code expired" << std::endl;
+			std::cout << " get verify code expired" << std::endl;
 			root["error"] = ErrorCodes::VerifyExpired;
 			std::string jsonstr = root.toStyledString();
 			beast::ostream(connection->m_response.body()) << jsonstr;
@@ -89,7 +89,7 @@ LogicSystem::LogicSystem()
 		}
 
 		if (verify_code != src_root["verifycode"].asString()) {
-			std::cout << " varify code error" << std::endl;
+			std::cout << " verify code error" << std::endl;
 			root["error"] = ErrorCodes::VerifyCodeErr;
 			std::string jsonstr = root.toStyledString();
 			beast::ostream(connection->m_response.body()) << jsonstr;
@@ -112,7 +112,7 @@ LogicSystem::LogicSystem()
 		root["passwd"] = pwd;
 		root["confirm"] = confirm;
 		root["icon"] = icon;
-		root["varifycode"] = src_root["varifycode"].asString();
+		root["verifycode"] = src_root["verifycode"].asString();
 		std::string jsonstr = root.toStyledString();
 		beast::ostream(connection->m_response.body()) << jsonstr;
 		return true; });
@@ -140,18 +140,18 @@ LogicSystem::LogicSystem()
 		auto pwd = src_root["passwd"].asString();
 
 		//先查找redis中email对应的验证码是否合理
-		std::string  varify_code;
-		bool b_get_varify = RedisMgr::GetInstance()->Get(CODEPREFIX + src_root["email"].asString(), varify_code);
-		if (!b_get_varify) {
-			std::cout << " get varify code expired" << std::endl;
+		std::string  verify_code;
+		bool b_get_verify = RedisMgr::GetInstance()->Get(CODEPREFIX + src_root["email"].asString(), verify_code);
+		if (!b_get_verify) {
+			std::cout << " get verify code expired" << std::endl;
 			root["error"] = ErrorCodes::VerifyExpired;
 			std::string jsonstr = root.toStyledString();
 			beast::ostream(connection->m_response.body()) << jsonstr;
 			return true;
 		}
 
-		if (varify_code != src_root["varifycode"].asString()) {
-			std::cout << " varify code error" << std::endl;
+		if (verify_code != src_root["verifycode"].asString()) {
+			std::cout << " verify code error" << std::endl;
 			root["error"] = ErrorCodes::VerifyCodeErr;
 			std::string jsonstr = root.toStyledString();
 			beast::ostream(connection->m_response.body()) << jsonstr;
@@ -182,7 +182,7 @@ LogicSystem::LogicSystem()
 		root["email"] = email;
 		root["user"] = name;
 		root["passwd"] = pwd;
-		root["varifycode"] = src_root["varifycode"].asString();
+		root["verifycode"] = src_root["verifycode"].asString();
 		std::string jsonstr = root.toStyledString();
 		beast::ostream(connection->m_response.body()) << jsonstr;
 		return true; });
