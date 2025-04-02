@@ -4,7 +4,9 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QRandomGenerator>
+#include <QDebug>
 
 RegisterDialog::RegisterDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::RegisterDialog), m_countdown(5)
@@ -39,6 +41,8 @@ RegisterDialog::RegisterDialog(QWidget *parent)
     connect(ui->verify_edit, &QLineEdit::editingFinished, this, [this](){
         checkVerifyValid();
     });
+
+    ui->user_edit->setValidator(new QRegExpValidator(QRegExp("[a-zA-Z0-9]+$")));
 
     //设置输入密码隐藏
     ui->pass_edit->setEchoMode(QLineEdit::Password);
@@ -109,6 +113,7 @@ void RegisterDialog::slot_reg_mod_finish(ReqId id, QByteArray res, ErrorCodes er
 
 void RegisterDialog::on_get_code_clicked()
 {
+    qDebug() << "已发出验证码请求";
     //验证邮箱的地址正则表达式
     auto email = ui->email_edit->text();
     bool valid = checkEmailValid();
@@ -158,12 +163,14 @@ void RegisterDialog::on_sure_btn_clicked()
 
 void RegisterDialog::on_cancel_btn_clicked()
 {
+    qDebug() << "取消按键";
     m_countdown_timer->stop();
     emit sigSwitchLogin();
 }
 
 void RegisterDialog::on_return_btn_clicked()
 {
+    qDebug() << "返回按键";
     m_countdown_timer->stop();
     emit sigSwitchLogin();
 }

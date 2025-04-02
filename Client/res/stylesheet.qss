@@ -67,8 +67,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 
 
 /*登录界面*/
-QDialog#LoginDialog{
-    background-color:rgb(255,255,255)
+QDialog#LoginDialog,#RegisterDialog,#ResetDialog{
+background-color:rgb(255,255,255)
 }
 
 #forget_label[state='normal'],#forget_label[state='selected']{
@@ -161,6 +161,10 @@ LoadingDlg{
 
 #chat_data_list{
      background: black;
+}
+
+#chat_area{
+    border: none;
 }
 
 #chatEdit{
@@ -363,11 +367,44 @@ LoadingDlg{
 #message_tip{
   text-align: center;
   font-family: "Microsoft YaHei";
-  font-size: 12pt;
+  font-size: 8pt;
 }
 
 #FindSuccessDlg{
    background-color: #ffffff;
+}
+
+#FindFailDlg{
+   background-color: #ffffff;
+}
+
+#fail_tip, #fail_tip2 {
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
+
+#fail_sure_btn[state='normal']{
+    background: #07c160;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+#fail_sure_btn[state='hover']{
+    background: #3bbb4b;
+    color: #ffffff;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+    border-radius: 20px; /* 设置圆角 */
+}
+
+#fail_sure_btn[state='press']{
+   background: #07c160;
+   color: #ffffff;
+   font-size: 14px; /* 设置字体大小 */
+   font-family: "Microsoft YaHei"; /* 设置字体 */
+   border-radius: 20px; /* 设置圆角 */
 }
 
 #name_lb{
@@ -669,4 +706,60 @@ ApplyFriendItem #addBtn[state='press'] {
     font-size: 16px; /* 设置字体大小 */
     font-family: "Microsoft YaHei"; /* 设置字体 */
     border-radius: 20px; /* 设置圆角 */
+}
+
+#friend_info_page #name_lb {
+    color: #161616;
+    font-size: 18px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+}
+
+#friend_info_page #nick_tip,
+#friend_info_page #nick_lb,
+#friend_info_page #bak_lb,
+#friend_info_page #bak_tip
+{
+    color: #161616;
+    font-size: 14px; /* 设置字体大小 */
+    font-family: "Microsoft YaHei"; /* 设置字体 */
+}
+
+#msg_chat[state='normal'] {
+ border-image: url(:/res/msg_chat_normal.png);
+}
+
+#msg_chat[state='hover'] {
+ border-image: url(:/res/msg_chat_hover.png);
+}
+
+#msg_chat[state='press'] {
+ border-image: url(:/res/msg_chat_press.png);
+}
+
+#video_chat[state='normal'] {
+ border-image: url(:/res/video_chat_normal.png);
+}
+
+#video_chat[state='hover'] {
+ border-image: url(:/res/video_chat_hover.png);
+}
+
+#video_chat[state='press'] {
+ border-image: url(:/res/video_chat_press.png);
+}
+
+#voice_chat[state='normal'] {
+ border-image: url(:/res/voice_chat_normal.png);
+}
+
+#voice_chat[state='hover'] {
+ border-image: url(:/res/voice_chat_hover.png);
+}
+
+#voice_chat[state='press'] {
+ border-image: url(:/res/voice_chat_press.png);
+}
+
+#red_point {
+    border-image: url(:/res/red_point.png);
 }

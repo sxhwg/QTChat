@@ -6,8 +6,6 @@ FindFailDlg::FindFailDlg(QWidget *parent)
     , ui(new Ui::FindFailDlg)
 {
     ui->setupUi(this);
-
-    ui->setupUi(this);
     // 设置对话框标题
     setWindowTitle("添加");
     // 隐藏对话框标题栏

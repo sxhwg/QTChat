@@ -14,6 +14,21 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QWidget" name="chat_data_wid" native="true">
      <property name="sizePolicy">
@@ -342,14 +357,14 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>ClickedLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">clickedlabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>ClickedBtn</class>
    <extends>QPushButton</extends>
    <header>clickedbtn.h</header>
-  </customwidget>
-  <customwidget>
-   <class>ClickedLabel</class>
-   <extends>QLabel</extends>
-   <header>clickedlabel.h</header>
   </customwidget>
   <customwidget>
    <class>MessageTextEdit</class>
